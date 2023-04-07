@@ -16,8 +16,9 @@ WORKDIR /wxcloudrun-wxcomponent
 COPY . /wxcloudrun-wxcomponent/
 
 # 执行代码编译命令。操作系统参数为linux，编译后的二进制产物命名为main，并存放在当前目录下。
+RUN GOPROXY="https://goproxy.cn"
 RUN go mod tidy
-RUN GOPROXY="https://goproxy.cn" GO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
+RUN GO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
 # 选用运行时所用基础镜像（GO语言选择原则：尽量体积小、包含基础linux内容的基础镜像）
 FROM alpine:3.13
